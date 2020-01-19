@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
+    </head>
+    <body>
+    <div id="app">
+        <h1 class="text-center">Bitcoin Price Index</h1>
+            
+            <section v-if="errored">
+                <p>We're sorry.</p>
+            </section>
+            <section v-else>
+                <div v-if="loading">Loading...</div>
+            
+                <div
+                    class="columns large-4 medium-4"
+                    v-else
+                    v-for="currency in info"
+                    class="currency"
+                >
+                    <div class="card">
+                        <div class="card-divider">
+                            {{ currency.code }}:
+                        </div>
+                        <div class="card-section">
+                            <span class="lighten">
+                                <span v-html="currency.symbol"></span>{{ currency.rate_float | currencydecimal }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </div>
+
+    
+    <script src="index.js"></script>
+    
+    
+    </body>
+</html>
